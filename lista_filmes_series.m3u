@@ -1,0 +1,107 @@
+#EXTM3U
+
+# ============================================================
+# LISTA IPTV - FILMES E SÉRIES
+# Atualizada: $(date)
+# ============================================================
+
+# ============================================================
+# FILMES INDEPENDENTES
+# ============================================================
+
+#EXTINF:-1 tvg-name="DarkFlix" group-title="Filmes Independentes",DarkFlix
+https://video01.soultv.com.br/darkflix/darkflix/playlist.m3u8
+
+#EXTINF:-1 tvg-name="Cine Brasil" group-title="Filmes Independentes",Cine Brasil
+https://stmv6.voxtvhd.com.br/cinebrasil/cinebrasil/chunklist_w670523199.m3u8
+
+#EXTINF:-1 tvg-name="Soul Cine Clube" group-title="Filmes Independentes",Soul Cine Clube
+https://video01.soultv.com.br/soulcine/soulcine/playlist.m3u8
+
+#EXTINF:-1 tvg-name="TV Top Mix Filmes" group-title="Filmes Independentes",TV Top Mix Filmes
+https://video03.logicahost.com.br/filmestopmixtv/filmestopmixtv/chunklist_w333847997.m3u8
+
+#EXTINF:-1 tvg-name="CINDIE TV" group-title="Filmes Independentes",CINDIE TV
+https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8
+
+#EXTINF:-1 tvg-name="Kuriakos Cine" group-title="Filmes Independentes",Kuriakos Cine
+https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8
+
+#EXTINF:-1 tvg-name="Gospel Movie TV" group-title="Filmes Independentes",Gospel Movie TV
+https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8
+
+# ============================================================
+# CANAIS PREMIUM - AXN, TNT, DISCOVERY, HBO, TELECINE
+# ============================================================
+
+#EXTINF:-1 tvg-name="AXN" group-title="Canais Premium",AXN
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182063
+
+#EXTINF:-1 tvg-name="TNT" group-title="Canais Premium",TNT
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182246
+
+#EXTINF:-1 tvg-name="TNT Series" group-title="Canais Premium",TNT Series
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182247
+
+#EXTINF:-1 tvg-name="Discovery Channel" group-title="Canais Premium",Discovery Channel
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182098
+
+#EXTINF:-1 tvg-name="Discovery H&H" group-title="Canais Premium",Discovery H&H
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182099
+
+#EXTINF:-1 tvg-name="Discovery Kids" group-title="Canais Premium",Discovery Kids
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182100
+
+#EXTINF:-1 tvg-name="Discovery Science" group-title="Canais Premium",Discovery Science
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182101
+
+#EXTINF:-1 tvg-name="Discovery Theater" group-title="Canais Premium",Discovery Theater
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182102
+
+#EXTINF:-1 tvg-name="Discovery Turbo" group-title="Canais Premium",Discovery Turbo
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182103
+
+#EXTINF:-1 tvg-name="Discovery World" group-title="Canais Premium",Discovery World
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182104
+
+#EXTINF:-1 tvg-name="HBO" group-title="Canais Premium",HBO
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182157
+
+#EXTINF:-1 tvg-name="HBO 2" group-title="Canais Premium",HBO 2
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182158
+
+#EXTINF:-1 tvg-name="HBO Family" group-title="Canais Premium",HBO Family
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182159
+
+#EXTINF:-1 tvg-name="HBO Mundi" group-title="Canais Premium",HBO Mundi
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182160
+
+#EXTINF:-1 tvg-name="HBO Pop" group-title="Canais Premium",HBO Pop
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182161
+
+#EXTINF:-1 tvg-name="HBO Signature" group-title="Canais Premium",HBO Signature
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182162
+
+#EXTINF:-1 tvg-name="HBO Xtreme" group-title="Canais Premium",HBO Xtreme
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182163
+
+#EXTINF:-1 tvg-name="HBO+" group-title="Canais Premium",HBO+
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182164
+
+#EXTINF:-1 tvg-name="Telecine Action" group-title="Canais Premium",Telecine Action
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182237
+
+#EXTINF:-1 tvg-name="Telecine Cult" group-title="Canais Premium",Telecine Cult
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182238
+
+#EXTINF:-1 tvg-name="Telecine Fun" group-title="Canais Premium",Telecine Fun
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182239
+
+#EXTINF:-1 tvg-name="Telecine Pipoca" group-title="Canais Premium",Telecine Pipoca
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182240
+
+#EXTINF:-1 tvg-name="Telecine Premium" group-title="Canais Premium",Telecine Premium
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182241
+
+#EXTINF:-1 tvg-name="Telecine Touch" group-title="Canais Premium",Telecine Touch
+http://62.182.83.108:80/Gattisla/wOpy2I0hWd/182242
