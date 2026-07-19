@@ -1,16 +1,11 @@
-﻿#EXTM3U
-
-# ============================================================
-# LISTA IPTV BRASIL - Canais Verificados
-# Atualizada: $(date)
-# ============================================================
+#EXTM3U
 
 # ============================================================
 # TV ABERTA BRASIL
 # ============================================================
 
 #EXTINF:-1 tvg-name="Rede Globo" group-title="TV Aberta Brasil",Rede Globo
-http://45.190.28.50/GLOBO_HD/index.m3u8
+http://45.190.156.152/GLOBO_HD/index.m3u8
 
 #EXTINF:-1 tvg-name="SBT Nacional" group-title="TV Aberta Brasil",SBT Nacional
 http://45.190.28.50/SBT_HD/index.m3u8
@@ -27,6 +22,9 @@ http://45.190.28.50/REDE_TV_HD/index.m3u8
 #EXTINF:-1 tvg-name="BandNews" group-title="TV Aberta Brasil",BandNews
 http://45.190.28.50/BAND_NEWS_HD/index.m3u8
 
+#EXTINF:-1 tvg-name="GloboNews" group-title="TV Aberta Brasil",GloboNews
+http://167.250.126.140:7777/GLOBONEWS-HD/index.m3u8
+
 #EXTINF:-1 tvg-name="Record News" group-title="TV Aberta Brasil",Record News
 http://45.190.28.50/RECORD_NEWS_HD/index.m3u8
 
@@ -38,6 +36,15 @@ http://45.162.64.114/FUTURA/index.m3u8
 
 #EXTINF:-1 tvg-name="TV Brasil" group-title="TV Aberta Brasil",TV Brasil
 https://tvbrasil-stream.ebc.com.br/index.m3u8
+
+#EXTINF:-1 tvg-name="Canal Educação" group-title="TV Aberta Brasil",Canal Educação
+https://canaleducacao-stream.ebc.com.br/index.m3u8
+
+#EXTINF:-1 tvg-name="Canal Brasil" group-title="TV Aberta Brasil",Canal Brasil
+http://45.190.156.152/CANAL_BRASIL/index.m3u8
+
+#EXTINF:-1 tvg-name="Viva" group-title="TV Aberta Brasil",Viva
+http://167.250.126.140:7777/VIVA-HD/index.m3u8
 
 #EXTINF:-1 tvg-name="RIT TV" group-title="TV Aberta Brasil",RIT TV
 http://45.190.28.50/RIT/index.m3u8
@@ -63,9 +70,6 @@ http://45.190.28.50/REDE_VIDA_HD/index.m3u8
 #EXTINF:-1 tvg-name="TV Evangelizar" group-title="TV Aberta Brasil",TV Evangelizar
 http://45.190.28.50/TV_EVANGELIZAR/index.m3u8
 
-#EXTINF:-1 tvg-name="TV Pai Eterno" group-title="TV Aberta Brasil",TV Pai Eterno
-http://45.190.28.50/PAI_ETERNO/index.m3u8
-
 #EXTINF:-1 tvg-name="Arte 1" group-title="TV Aberta Brasil",Arte 1
 http://45.190.28.50/ARTE_1/index.m3u8
 
@@ -84,26 +88,95 @@ http://45.190.28.50/TV_ESCOLA/index.m3u8
 #EXTINF:-1 tvg-name="SESC TV" group-title="TV Aberta Brasil",SESC TV
 http://45.190.28.50/SESC_TV/index.m3u8
 
+#EXTINF:-1 tvg-name="Multishow" group-title="TV Aberta Brasil",Multishow
+http://167.250.126.140:7777/MULTISHOW-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Gloob" group-title="TV Aberta Brasil",Gloob
+http://167.250.126.140:7777/GLOOB-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Gloobinho" group-title="TV Aberta Brasil",Gloobinho
+http://167.250.126.140:7777/GLOOBINHO-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="GNT" group-title="TV Aberta Brasil",GNT
+http://167.250.126.140:7777/GNT-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Megapix" group-title="TV Aberta Brasil",Megapix
+http://167.250.126.140:7777/MEGAPIX-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Bis" group-title="TV Aberta Brasil",Bis
+http://167.250.126.140:7777/BIS-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Combate" group-title="TV Aberta Brasil",Combate
+http://45.190.156.152/COMBATE/index.m3u8
+
+#EXTINF:-1 tvg-name="Curta!" group-title="TV Aberta Brasil",Curta!
+http://167.250.126.140:7777/CURTA!-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Disney Channel" group-title="TV Aberta Brasil",Disney Channel
+http://167.250.126.140:7777/DISNEY-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Fashion TV" group-title="TV Aberta Brasil",Fashion TV
+http://167.250.126.140:7777/FASHIONTV-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="History" group-title="TV Aberta Brasil",History
+http://45.190.28.50/HISTORY_HD/index.m3u8
+
+#EXTINF:-1 tvg-name="National Geographic" group-title="TV Aberta Brasil",National Geographic
+http://167.250.126.140:7777/NATGEO-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Sony Channel" group-title="TV Aberta Brasil",Sony Channel
+http://167.250.126.140:7777/SONY-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Sony Movies" group-title="TV Aberta Brasil",Sony Movies
+http://45.190.28.50/SONY_MOVIES/index.m3u8
+
+#EXTINF:-1 tvg-name="AXN" group-title="TV Aberta Brasil",AXN
+http://45.190.28.50/AXN_HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Play TV" group-title="TV Aberta Brasil",Play TV
+http://167.250.126.140:7777/PLAYTV-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="WooHoo" group-title="TV Aberta Brasil",WooHoo
+http://143.14.178.40:7777/Woohoo_HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Box Kids TV" group-title="TV Aberta Brasil",Box Kids TV
+http://167.250.126.140:7777/NICKJR-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="DumDum" group-title="TV Aberta Brasil",DumDum
+http://167.250.126.140:7777/ZOOMOO-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="TV Ra Tim Bum" group-title="TV Aberta Brasil",TV Ra Tim Bum
+http://45.190.28.50/RATIMBUM/index.m3u8
+
+#EXTINF:-1 tvg-name="Canal do Boi" group-title="TV Aberta Brasil",Canal do Boi
+http://45.190.28.50/CANAL_DO_BOI/index.m3u8
+
+#EXTINF:-1 tvg-name="Terra Viva" group-title="TV Aberta Brasil",Terra Viva
+http://45.190.28.50/TERRA_VIVA_HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Fish TV" group-title="TV Aberta Brasil",Fish TV
+http://167.250.126.140:7777/FISHTV-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Music Box Brazil" group-title="TV Aberta Brasil",Music Box Brazil
+http://167.250.126.140:7777/MUSICBOXBRASIL-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Travel Box Brazil" group-title="TV Aberta Brasil",Travel Box Brazil
+http://167.250.126.140:7777/TRAVELBOX-HD/index.m3u8
+
+#EXTINF:-1 tvg-name="Canal Off" group-title="TV Aberta Brasil",Canal Off
+http://167.250.126.140:7777/OFF-HD/index.m3u8
+
 #EXTINF:-1 tvg-name="Rede CNT" group-title="TV Aberta Brasil",Rede CNT
 http://45.190.28.50/CNT_HD/index.m3u8
 
 #EXTINF:-1 tvg-name="Canal Rural" group-title="TV Aberta Brasil",Canal Rural
 https://607d2a1a47b1f.streamlock.net/crur/smil:canalrural.smil/playlist.m3u8
 
-#EXTINF:-1 tvg-name="Jovem Pan News" group-title="TV Aberta Brasil",Jovem Pan News
-http://45.190.28.50/JP_NEWS/index.m3u8
-
 #EXTINF:-1 tvg-name="Canal UOL" group-title="TV Aberta Brasil",Canal UOL
 https://video24.mais.uol.com.br/live/6146.m3u8
 
-#EXTINF:-1 tvg-name="Sony Channel" group-title="TV Aberta Brasil",Sony Channel
-http://45.190.28.50/SONY_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Sony Movies" group-title="TV Aberta Brasil",Sony Movies
-http://45.162.64.114/SONY_MOVIES/index.m3u8
-
-#EXTINF:-1 tvg-name="History" group-title="TV Aberta Brasil",History
-http://45.190.28.50/HISTORY_HD/index.m3u8
+#EXTINF:-1 tvg-name="Jovem Pan News" group-title="TV Aberta Brasil",Jovem Pan News
+http://45.190.28.50/JP_NEWS/index.m3u8
 
 # ============================================================
 # SAMSUNG TV PLUS BRASIL
@@ -127,6 +200,9 @@ https://run-th-br-lgchannels.otteravision.com/run/th_br/th_br.m3u8
 #EXTINF:-1 tvg-name="RunTime Comedia" group-title="Samsung TV Plus BR",RunTime Comedia
 https://run-rc-br-lgchannels.otteravision.com/run/rc_br/rc_br.m3u8
 
+#EXTINF:-1 tvg-name="RunTime Crime" group-title="Samsung TV Plus BR",RunTime Crime
+https://run-cr-br-lgchannels.otteravision.com/run/cr_br/cr_br.m3u8
+
 #EXTINF:-1 tvg-name="RunTime Familia" group-title="Samsung TV Plus BR",RunTime Familia
 https://run-rufb-lgchannels.otteravision.com/run/rufb/rufb.m3u8
 
@@ -136,11 +212,20 @@ https://run-ro-br-lgchannels.otteravision.com/run/ro_br/ro_br.m3u8
 #EXTINF:-1 tvg-name="Toon Google" group-title="Samsung TV Plus BR",Toon Google
 https://tg-tg-br.otteravision.com/tg/tg_br/tg_br.m3u8
 
+#EXTINF:-1 tvg-name="Adrenalina Pura TV" group-title="Samsung TV Plus BR",Adrenalina Pura TV
+https://amg00740-sofa-amg00740c7-lg-br-7305.playouts.now.amagi.tv/playlist.m3u8
+
 #EXTINF:-1 tvg-name="Cazé TV" group-title="Samsung TV Plus BR",Cazé TV
 https://amg01391-amg01391c10-tcl-br-9630.playouts.now.amagi.tv/playlist.m3u8
 
 #EXTINF:-1 tvg-name="GE TV" group-title="Samsung TV Plus BR",GE TV
 https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8
+
+#EXTINF:-1 tvg-name="Filmelier" group-title="Samsung TV Plus BR",Filmelier
+https://amg00740-sofa-amg00740c8-lg-br-7321.playouts.now.amagi.tv/playlist.m3u8
+
+#EXTINF:-1 tvg-name="Turma da Mônica" group-title="Samsung TV Plus BR",Turma da Mônica
+https://amg00740-sofa-amg00740c9-lg-br-7304.playouts.now.amagi.tv/playlist.m3u8
 
 #EXTINF:-1 tvg-name="New Brasil" group-title="Samsung TV Plus BR",New Brasil
 https://amg01391-sbtinfast-amg01391c5-lg-br-6099.playouts.now.amagi.tv/playlist.m3u8
@@ -150,3 +235,47 @@ https://d29h829bjuxghm.cloudfront.net/hls/master.m3u8?includeAssetTags=true&ads.
 
 #EXTINF:-1 tvg-name="Tastemade Viagens" group-title="Samsung TV Plus BR",Tastemade Viagens
 https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Tastemade/TastemadeTravel_BR/TastemadeTravel.m3u8
+
+# ============================================================
+# PLUTO TV BRASIL
+# ============================================================
+
+#EXTINF:-1 tvg-name="Pluto TV Anime" group-title="Pluto TV BR",Pluto TV Anime
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/61038a1a8eb0a60007b43e04/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Comedy Central" group-title="Pluto TV BR",Comedy Central
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05f9a4a0a5670009a838b0/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Mr. Bean" group-title="Pluto TV BR",Mr. Bean
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5e0d742b1e0f660007c7f9c1/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="FailArmy" group-title="Pluto TV BR",FailArmy
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05fb1b8cb126000923a61e/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Pegadinhas" group-title="Pluto TV BR",Pegadinhas
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05fc1b8cb126000923a650/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="PORTATV" group-title="Pluto TV BR",PORTATV
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/62545b8b002f4b0007688b5e/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="The Pet Collective" group-title="Pluto TV BR",The Pet Collective
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05fa178cb126000923a5e3/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Nickelodeon" group-title="Pluto TV BR",Nickelodeon
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05f85ba0a5670009a8384e/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="MTV" group-title="Pluto TV BR",MTV
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05f76ca0a5670009a83814/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Star Trek" group-title="Pluto TV BR",Star Trek
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05f699a0a5670009a837d5/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="South Park BR" group-title="Pluto TV BR",South Park BR
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/5d05f8a2a0a5670009a83869/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Novelas" group-title="Pluto TV BR",Novelas
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/62545c1b002f4b0007688b63/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+#EXTINF:-1 tvg-name="Bob Esponja - 24h" group-title="Pluto TV BR",Bob Esponja - 24h
+http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/62545c0b002f4b0007688b61/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
