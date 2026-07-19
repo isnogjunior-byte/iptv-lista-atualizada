@@ -2,7 +2,7 @@ name: Atualizar Lista IPTV
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */4 * * *'
   workflow_dispatch:
 
 permissions:
@@ -14,38 +14,305 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Baixar playlists
+      - name: Instalar dependências
         run: |
-          curl -sL "https://raw.githubusercontent.com/OwnerPlugins/pluto-tv-m3u/main/pluto-live-BR.m3u" -o pluto.m3u
-          curl -sL "https://raw.githubusercontent.com/BuddyChewChew/app-m3u-generator/main/playlists/samsungtvplus_all.m3u" -o samsung.m3u
-          curl -sL "https://iptv-org.github.io/iptv/countries/br.m3u" -o aberta.m3u
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq curl
+
+      - name: Baixar TV Aberta verificada
+        run: |
+          curl -sL "https://iptv-org.github.io/iptv/countries/br.m3u" -o /tmp/aberta_raw.m3u
+
+          # Filtrar apenas canais brasileiros conhecidos
+          cat > /tmp/filtro_aberta.txt << 'FILTRO'
+          globo.com
+          band.uol.com.br
+          bandnewsfm.com
+          redeglobo.globo.com
+          futura.globo.com
+          g1.globo.com
+          spf.globo.com
+          brasil.globo.com
+          tvrecord.r7.com
+          sbt.com.br
+          redeboasatv.com.br
+          recordtv.r7.com
+          redetv.uol.com.br
+          tvazazz.com.br
+          bandtv.com
+          portovitoria.com
+          FILTRO
+
+          # Criar playlist filtrada
+          echo "#EXTM3U" > /tmp/aberta.m3u
+          awk '/#EXTINF:/{canal=$0; next} /^http/{url=$0; print canal"\n"url"\n"}' /tmp/aberta_raw.m3u > /tmp/aberta_temp.txt
+
+          # Manter apenas canais conhecidos
+          python3 -c "
+          import re
+          canais_conhecidos = [
+              'Globo', 'Band', 'SBT', 'Record', 'RedeTV', 'TV Cultura',
+              'Canal Futura', 'BandNews', 'Canal Brasil', 'Viva',
+              'GloboNews', 'Canal Rural', 'TV Brasil', 'EBC',
+              'RIT', 'Canal Empreendedor', 'Mais Globe',
+              'TV Gazeta', 'TV Aparecida', 'Canal Pax',
+              'TV União', 'TV Liberal', 'NSC Total',
+              'TV Caçula', 'TV Tarobá', 'TV Iguaçu',
+              'TV Massa', 'TV Pampa', 'TV Diário',
+              'TV Verdes Mares', 'TV Integração', 'TV Vitória',
+              'TV Ponta Negra', 'TV Bahia', 'TV Subaé'
+          ]
+          with open('/tmp/aberta.m3u', 'w') as f:
+              f.write('#EXTM3U\n\n')
+              with open('/tmp/aberta_raw.m3u') as raw:
+                  lines = raw.readlines()
+                  i = 0
+                  while i < len(lines):
+                      line = lines[i].strip()
+                      if line.startswith('#EXTINF:'):
+                          # Extrair nome do canal
+                          match = re.search(r'tvg-name=\"([^\"]+)\"', line)
+                          if match:
+                              nome = match.group(1)
+                          else:
+                              nome = line.split(',')[-1].strip() if ',' in line else ''
+
+                          # Verificar se é canal conhecido
+                          if any(c.lower() in nome.lower() for c in canais_conhecidos):
+                              f.write(line + '\n')
+                              if i+1 < len(lines):
+                                  f.write(lines[i+1].strip() + '\n\n')
+                      i += 1
+          "
+
+          echo "TV Aberta filtrada: $(grep -c '#EXTINF:' /tmp/aberta.m3u) canais"
+
+      - name: Baixar Samsung TV Plus BR
+        run: |
+          # Samsung TV Plus BR - canais verificados do josemtocco
+          cat > /tmp/samsung.m3u << 'SAMSUNG'
+          #EXTINF:-1 tvg-id="CanalLike.br" tvg-name="Canal Like" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Canal_Like_logo.png/200px-Canal_Like_logo.png" group-title="Samsung TV Plus BR",Canal Like
+          https://cnl-cl-samsung.otteravision.com/cnl/cl_h265/cl_h265.m3u8
+
+          #EXTINF:-1 tvg-id="Veja.br" tvg-name="VEJA+" tvg-logo="" group-title="Samsung TV Plus BR",VEJA+
+          https://gpa-vja-samsungtvplus-br.otteravision.com/gpa/vja/vja_h265.m3u8
+
+          #EXTINF:-1 tvg-id="MovieSphere.br" tvg-name="Movie Sphere" tvg-logo="" group-title="Samsung TV Plus BR",Movie Sphere
+          https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00353-lionsgatestudio-moviespherebrazil-samsungbr/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="SonyOneCinema.br" tvg-name="Sony One Cinema" tvg-logo="" group-title="Samsung TV Plus BR",Sony One Cinema
+          https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="RunTimeCineEspanto.br" tvg-name="RunTime Cine Espanto" tvg-logo="" group-title="Samsung TV Plus BR",RunTime Cine Espanto
+          https://run-th-br-lgchannels.otteravision.com/run/th_br/th_br.m3u8
+
+          #EXTINF:-1 tvg-id="RunTimeComedia.br" tvg-name="RunTime Comedia" tvg-logo="" group-title="Samsung TV Plus BR",RunTime Comedia
+          https://run-rc-br-lgchannels.otteravision.com/run/rc_br/rc_br.m3u8
+
+          #EXTINF:-1 tvg-id="RunTimeCrime.br" tvg-name="RunTime Crime" tvg-logo="" group-title="Samsung TV Plus BR",RunTime Crime
+          https://run-cr-br-lgchannels.otteravision.com/run/cr_br/cr_br.m3u8
+
+          #EXTINF:-1 tvg-id="RunTimeFamilia.br" tvg-name="RunTime Familia" tvg-logo="" group-title="Samsung TV Plus BR",RunTime Familia
+          https://run-rufb-lgchannels.otteravision.com/run/rufb/rufb.m3u8
+
+          #EXTINF:-1 tvg-id="RunTimeRomance.br" tvg-name="RunTime Romance" tvg-logo="" group-title="Samsung TV Plus BR",RunTime Romance
+          https://run-ro-br-lgchannels.otteravision.com/run/ro_br/ro_br.m3u8
+
+          #EXTINF:-1 tvg-id="ToonGoogle.br" tvg-name="Toon Google" tvg-logo="" group-title="Samsung TV Plus BR",Toon Google
+          https://tg-tg-br.otteravision.com/tg/tg_br/tg_br.m3u8
+
+          #EXTINF:-1 tvg-id="AdrenalinaPuraTV.br" tvg-name="Adrenalina Pura TV" tvg-logo="" group-title="Samsung TV Plus BR",Adrenalina Pura TV
+          https://amg00740-sofa-amg00740c7-lg-br-7305.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="CazeTV.br" tvg-name="Cazé TV" tvg-logo="" group-title="Samsung TV Plus BR",Cazé TV
+          https://amg01391-amg01391c10-tcl-br-9630.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="GEtv.br" tvg-name="GE TV" tvg-logo="" group-title="Samsung TV Plus BR",GE TV
+          https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="Filmelier.br" tvg-name="Filmelier" tvg-logo="" group-title="Samsung TV Plus BR",Filmelier
+          https://amg00740-sofa-amg00740c8-lg-br-7321.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TurmaDaMonica.br" tvg-name="Turma da Mônica" tvg-logo="" group-title="Samsung TV Plus BR",Turma da Mônica
+          https://amg00740-sofa-amg00740c9-lg-br-7304.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="NewBrasil.br" tvg-name="New Brasil" tvg-logo="" group-title="Samsung TV Plus BR",New Brasil
+          https://amg01391-sbtinfast-amg01391c5-lg-br-6099.playouts.now.amagi.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="LoveNature.br" tvg-name="Love Nature" tvg-logo="" group-title="Samsung TV Plus BR",Love Nature
+          http://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/5f1213ba0ecebc00070e170f/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+
+          #EXTINF:-1 tvg-id="BobEsponja24h.br" tvg-name="Bob Esponja - 24h" tvg-logo="" group-title="Samsung TV Plus BR",Bob Esponja - 24h
+          http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/62545c0b002f4b0007688b61/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung
+          SAMSUNG
+
+          echo "Samsung TV Plus BR: $(grep -c '#EXTINF:' /tmp/samsung.m3u) canais"
+
+      - name: Baixar Pluto TV BR (tokens frescos)
+        run: |
+          # Buscar tokens frescos do Pluto TV
+          python3 << 'PYTHON'
+          import json
+          import urllib.request
+          import uuid
+
+          print("Buscando tokens frescos do Pluto TV BR...")
+
+          try:
+              # Buscar lista de canais
+              req = urllib.request.Request(
+                  'https://boot.pluto.tv/v4/start?appName=web&appVersion=8.0.0&deviceVersion=122.0.0&deviceId=' + str(uuid.uuid4()) + '&deviceType=web&deviceMake=web&clientID=' + str(uuid.uuid4()),
+                  headers={'User-Agent': 'Mozilla/5.0'}
+              )
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  data = json.loads(resp.read())
+                  session_token = data.get('sessionToken', '')
+                  server_side_stitch = data.get('serverSideStitch', False)
+
+                  print(f"Session token obtido: {len(session_token)} chars")
+
+                  # Buscar EPG para obter IDs dos canais BR
+                  channels = data.get('channels', [])
+                  br_channels = [ch for ch in channels if ch.get('category') in ['Anime & Geek', 'Comedia', 'Curiosidades', 'Esportes', 'Estilo de Vida', 'Filmes', 'Infantil', 'Investigacao', 'Musica', 'Misterios e Sobrenatural', 'MTV', 'Natureza', 'Nickelodeon', 'Noticias', 'Novelas', 'Reality', 'Retro', 'Series', 'South Park br', 'Star Trek', 'TV Brasileira']]
+
+                  if not br_channels:
+                      br_channels = channels  # Fallback: usar todos
+
+                  print(f"Canais encontrados: {len(br_channels)}")
+
+                  # Gerar M3U com tokens frescos
+                  with open('/tmp/pluto.m3u', 'w') as f:
+                      for ch in br_channels[:50]:  # Limitar a 50 canais mais populares
+                          ch_id = ch.get('_id', '')
+                          ch_name = ch.get('name', 'Pluto TV')
+                          ch_image = ch.get('images', [{}])[0].get('url', '') if ch.get('images') else ''
+
+                          # URL com stitch para tokens frescos
+                          stitch_url = f"http://service-stitcher-ipv4.clusters.pluto.tv/v1/stitch/embed/hls/channel/{ch_id}/master.m3u8?deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung&sessionToken={session_token}"
+
+                          f.write(f'#EXTINF:-1 tvg-id="pluto.{ch_id}" tvg-name="{ch_name}" tvg-logo="{ch_image}" group-title="Pluto TV BR",{ch_name}\n')
+                          f.write(f'{stitch_url}\n\n')
+
+                  print(f"Pluto TV: {len(br_channels[:50])} canais gerados com tokens frescos")
+
+          except Exception as e:
+              print(f"Erro ao buscar Pluto TV: {e}")
+              # Fallback: playlist vazia
+              with open('/tmp/pluto.m3u', 'w') as f:
+                  f.write('#EXTM3U\n')
+          PYTHON
+
+      - name: Baixar canais independentes BR
+        run: |
+          # Canais brasileiros independentes verificados
+          cat > /tmp/independentes.m3u << 'INDEP'
+          #EXTINF:-1 tvg-id="AdessoTV.br" tvg-name="Adesso TV" tvg-logo="" group-title="TV Independente BR",Adesso TV
+          https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/chunklist.m3u8
+
+          #EXTINF:-1 tvg-id="BemMelhor.br" tvg-name="Bem Melhor" tvg-logo="" group-title="TV Independente BR",Bem Melhor
+          https://video01.soultv.com.br/bemmelhor/bemmelhor/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="CanalEducacao.br" tvg-name="Canal Educação" tvg-logo="" group-title="TV Independente BR",Canal Educação
+          https://canaleducacao-stream.ebc.com.br/index.m3u8
+
+          #EXTINF:-1 tvg-id="ConectaMais.br" tvg-name="Conecta Mais" tvg-logo="" group-title="TV Independente BR",Conecta Mais
+          https://transcoder7.adyl.net.br/Conecta/tracks-v1a1/mono.m3u8
+
+          #EXTINF:-1 tvg-id="HalloSeries.br" tvg-name="Hallo Series" tvg-logo="" group-title="TV Independente BR",Hallo Series
+          https://cdn-5.nxplay.com.br/HALLOSERIES/tracks-v1a1/mono.m3u8
+
+          #EXTINF:-1 tvg-id="HalloClassic.br" tvg-name="Hallo Classic" tvg-logo="" group-title="TV Independente BR",Hallo Classic
+          https://cdn-5.nxplay.com.br/HALLOCLASSIC/tracks-v1a1/mono.m3u8
+
+          #EXTINF:-1 tvg-id="NGT.br" tvg-name="NGT" tvg-logo="" group-title="TV Independente BR",NGT
+          https://isaocorp.cloudecast.com/ngt/tracks-v1a1/mono.m3u8
+
+          #EXTINF:-1 tvg-id="PetloversTV.br" tvg-name="Petlovers TV" tvg-logo="" group-title="TV Independente BR",Petlovers TV
+          https://video04.logicahost.com.br/petloverstv/petloverstv/chunklist_w1999339200.m3u8
+
+          #EXTINF:-1 tvg-id="REISENCLUBETV.br" tvg-name="REISEN CLUBE TV" tvg-logo="" group-title="TV Independente BR",REISEN CLUBE TV
+          https://pop.uniquetv.com.br/reisenclubetv/video.m3u8
+
+          #EXTINF:-1 tvg-id="RoyalWorld.br" tvg-name="Royal World" tvg-logo="" group-title="TV Independente BR",Royal World
+          https://amogo-networx-royalworldnobrezaedinastias-1-br.vidaa.wurl.tv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TastemadeViagens.br" tvg-name="Tastemade Viagens" tvg-logo="" group-title="TV Independente BR",Tastemade Viagens
+          https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Tastemade/TastemadeTravel_BR/TastemadeTravel.m3u8
+
+          #EXTINF:-1 tvg-id="TVClube.br" tvg-name="TV Clube" tvg-logo="" group-title="TV Independente BR",TV Clube
+          https://5c483b9d1019c.streamlock.net:443/8186/8186/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TVMetropolitana.br" tvg-name="TV Metropolitana" tvg-logo="" group-title="TV Independente BR",TV Metropolitana
+          https://srv1.zcast.com.br/metropolitanatv/metropolitanatv/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TVNBN.br" tvg-name="TV NBN" tvg-logo="" group-title="TV Independente BR",TV NBN
+          https://cdn.jmvstream.com/w/LVW-8410/LVW8410_uiZOVm6vz1/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TVPampa.br" tvg-name="TV Pampa" tvg-logo="" group-title="TV Independente BR",TV Pampa
+          https://video04.logicahost.com.br/tvpampa/tvpampa/chunklist_w880757487.m3u8
+
+          #EXTINF:-1 tvg-id="TVPassoFundo.br" tvg-name="TV Passo Fundo" tvg-logo="" group-title="TV Independente BR",TV Passo Fundo
+          https://5a57bda70564a.streamlock.net/tvpasso/tvpasso.sdp/chunklist_w1587811884.m3u8
+
+          #EXTINF:-1 tvg-id="TVSantaMaria.br" tvg-name="TV Santa Maria" tvg-logo="" group-title="TV Independente BR",TV Santa Maria
+          https://cdn-tvsantamaria.ciclano.io:1443/tvsantamaria/tvsantamaria/playlist.m3u8
+
+          #EXTINF:-1 tvg-id="TvTopMixFilmes.br" tvg-name="TV Top Mix Filmes" tvg-logo="" group-title="TV Independente BR",TV Top Mix Filmes
+          https://video03.logicahost.com.br/filmestopmixtv/filmestopmixtv/chunklist_w333847997.m3u8
+
+          #EXTINF:-1 tvg-id="TVZoom.br" tvg-name="TV Zoom" tvg-logo="" group-title="TV Independente BR",TV Zoom
+          https://cdn.jmvstream.com/w/LVW-9730/LVW9730_LmUwslM8jt/chunklist.m3u8
+
+          #EXTINF:-1 tvg-id="VamboraChannel.br" tvg-name="Vambora Channel" tvg-logo="" group-title="TV Independente BR",Vambora Channel
+          https://video07.logicahost.com.br/vamborachannel/vamborachannel/chunklist_w1663846919.m3u8
+
+          #EXTINF:-1 tvg-id="AnimationPlus.br" tvg-name="Animation +" tvg-logo="" group-title="TV Independente BR",Animation +
+          https://linear-918.frequency.stream/mt/plex/918/hls/master/playlist_1920x1080.m3u8
+
+          #EXTINF:-1 tvg-id="Grjngo.br" tvg-name="Grjngo" tvg-logo="" group-title="TV Independente BR",Grjngo
+          https://amogonetworx-grjngo-1-eu.plex.wurl.tv/4300.m3u8
+          INDEP
+
+          echo "Independentes BR: $(grep -c '#EXTINF:' /tmp/independentes.m3u) canais"
 
       - name: Combinar playlists
         run: |
           echo "#EXTM3U" > lista_iptv.m3u
           echo "" >> lista_iptv.m3u
           echo "# ============================================================" >> lista_iptv.m3u
-          echo "# LISTA IPTV UNIFICADA - Atualizada automaticamente" >> lista_iptv.m3u
-          echo "# Gerado em: $(date +'%d/%m/%Y %H:%M')" >> lista_iptv.m3u
+          echo "# LISTA IPTV BRASIL - Atualizada automaticamente" >> lista_iptv.m3u
+          echo "# Gerado em: $(TZ='America/Sao_Paulo' date +'%d/%m/%Y %H:%M')" >> lista_iptv.m3u
+          echo "# Fontes: TV Aberta, Samsung TV Plus BR, Pluto TV BR, Independentes" >> lista_iptv.m3u
           echo "# ============================================================" >> lista_iptv.m3u
           echo "" >> lista_iptv.m3u
+
+          # TV Aberta
           echo "# ============================================================" >> lista_iptv.m3u
           echo "# TV ABERTA BRASIL" >> lista_iptv.m3u
           echo "# ============================================================" >> lista_iptv.m3u
-          cat aberta.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+          cat /tmp/aberta.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
           echo "" >> lista_iptv.m3u
+
+          # Samsung TV Plus BR
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# SAMSUNG TV PLUS BRASIL" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          cat /tmp/samsung.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+          echo "" >> lista_iptv.m3u
+
+          # Pluto TV BR
           echo "# ============================================================" >> lista_iptv.m3u
           echo "# PLUTO TV BRASIL" >> lista_iptv.m3u
           echo "# ============================================================" >> lista_iptv.m3u
-          cat pluto.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+          cat /tmp/pluto.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
           echo "" >> lista_iptv.m3u
-          echo "# ============================================================" >> lista_iptv.m3u
-          echo "# SAMSUNG TV PLUS" >> lista_iptv.m3u
-          echo "# ============================================================" >> lista_iptv.m3u
-          cat samsung.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
 
-      - name: Contar canais
-        run: |
+          # Independentes
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# TV INDEPENDENTE BRASIL" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          cat /tmp/independentes.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+
           CANAIS=$(grep -c "#EXTINF:" lista_iptv.m3u)
           echo "Total de canais: $CANAIS"
 
@@ -54,5 +321,5 @@ jobs:
           git config user.name "IPTV Bot"
           git config user.email "bot@iptv.local"
           git add lista_iptv.m3u
-          git diff --staged --quiet || git commit -m "Atualizacao automatica $(date +'%d/%m/%Y %H:%M')"
+          git diff --staged --quiet || git commit -m "Atualizacao automatica $(TZ='America/Sao_Paulo' date +'%d/%m/%Y %H:%M')"
           git push
