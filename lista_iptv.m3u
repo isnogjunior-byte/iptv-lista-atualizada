@@ -1,7 +1,7 @@
 ﻿#EXTM3U
 
 # ============================================================
-# LISTA IPTV BRASIL - URLs Diretas Verificadas
+# LISTA IPTV BRASIL - Canais Verificados
 # Atualizada: $(date)
 # ============================================================
 
@@ -27,9 +27,6 @@ http://45.190.28.50/REDE_TV_HD/index.m3u8
 #EXTINF:-1 tvg-name="BandNews" group-title="TV Aberta Brasil",BandNews
 http://45.190.28.50/BAND_NEWS_HD/index.m3u8
 
-#EXTINF:-1 tvg-name="GloboNews" group-title="TV Aberta Brasil",GloboNews
-http://143.14.178.40:7777/GloboNews_HD/index.m3u8
-
 #EXTINF:-1 tvg-name="Record News" group-title="TV Aberta Brasil",Record News
 http://45.190.28.50/RECORD_NEWS_HD/index.m3u8
 
@@ -41,12 +38,6 @@ http://45.162.64.114/FUTURA/index.m3u8
 
 #EXTINF:-1 tvg-name="TV Brasil" group-title="TV Aberta Brasil",TV Brasil
 https://tvbrasil-stream.ebc.com.br/index.m3u8
-
-#EXTINF:-1 tvg-name="Canal Educação" group-title="TV Aberta Brasil",Canal Educação
-http://45.162.64.114/CANAL_EDUCACAO/index.m3u8
-
-#EXTINF:-1 tvg-name="Viva (Globo Novelas)" group-title="TV Aberta Brasil",Viva (Globo Novelas)
-http://143.14.178.40:7777/Globoplay_Novelas_HD/index.m3u8
 
 #EXTINF:-1 tvg-name="RIT TV" group-title="TV Aberta Brasil",RIT TV
 http://45.190.28.50/RIT/index.m3u8
@@ -105,71 +96,14 @@ http://45.190.28.50/JP_NEWS/index.m3u8
 #EXTINF:-1 tvg-name="Canal UOL" group-title="TV Aberta Brasil",Canal UOL
 https://video24.mais.uol.com.br/live/6146.m3u8
 
-#EXTINF:-1 tvg-name="Multishow" group-title="TV Aberta Brasil",Multishow
-http://143.14.178.40:7777/Multishow_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Gloob" group-title="TV Aberta Brasil",Gloob
-http://143.14.178.40:7777/Gloob_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Gloobinho" group-title="TV Aberta Brasil",Gloobinho
-http://143.14.178.40:7777/Gloobinho_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="GNT" group-title="TV Aberta Brasil",GNT
-http://143.14.178.40:7777/GNT_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Megapix" group-title="TV Aberta Brasil",Megapix
-http://143.14.178.40:7777/Megapix_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Bis" group-title="TV Aberta Brasil",Bis
-http://143.14.178.40:7777/BIS_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Combate" group-title="TV Aberta Brasil",Combate
-http://143.14.134.107/167/index.m3u8
-
-#EXTINF:-1 tvg-name="Curta!" group-title="TV Aberta Brasil",Curta!
-http://45.190.156.152/CURTA!/index.m3u8
-
-#EXTINF:-1 tvg-name="Fashion TV" group-title="TV Aberta Brasil",Fashion TV
-http://45.190.28.50/FASHION_TV_HD/index.m3u8
-
 #EXTINF:-1 tvg-name="Sony Channel" group-title="TV Aberta Brasil",Sony Channel
 http://45.190.28.50/SONY_HD/index.m3u8
 
 #EXTINF:-1 tvg-name="Sony Movies" group-title="TV Aberta Brasil",Sony Movies
 http://45.162.64.114/SONY_MOVIES/index.m3u8
 
-#EXTINF:-1 tvg-name="Play TV" group-title="TV Aberta Brasil",Play TV
-http://45.162.64.114/PLAY_TV/index.m3u8
-
-#EXTINF:-1 tvg-name="WooHoo" group-title="TV Aberta Brasil",WooHoo
-http://45.190.28.50/WOOHOO/index.m3u8
-
-#EXTINF:-1 tvg-name="Box Kids TV" group-title="TV Aberta Brasil",Box Kids TV
-http://45.190.28.50/BOX_KIDS_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="DumDum" group-title="TV Aberta Brasil",DumDum
-http://45.190.156.152/ZOOMOO/index.m3u8
-
-#EXTINF:-1 tvg-name="TV Ra Tim Bum" group-title="TV Aberta Brasil",TV Ra Tim Bum
-http://45.162.64.114/RA_TIM_BUM/index.m3u8
-
-#EXTINF:-1 tvg-name="Canal do Boi" group-title="TV Aberta Brasil",Canal do Boi
-http://45.162.64.114/CANAL_DO_BOI/index.m3u8
-
-#EXTINF:-1 tvg-name="Terra Viva" group-title="TV Aberta Brasil",Terra Viva
-http://45.162.64.114/TERRAVIVA/index.m3u8
-
-#EXTINF:-1 tvg-name="Fish TV" group-title="TV Aberta Brasil",Fish TV
-http://45.190.28.50/FISH_TV_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Music Box Brazil" group-title="TV Aberta Brasil",Music Box Brazil
-http://45.190.28.50/MUSIC_BOX_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Travel Box Brazil" group-title="TV Aberta Brasil",Travel Box Brazil
-http://45.190.28.50/TRAVEL_BOX_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Canal Off" group-title="TV Aberta Brasil",Canal Off
-http://143.14.178.40:7777/OFF_HD/index.m3u8
+#EXTINF:-1 tvg-name="History" group-title="TV Aberta Brasil",History
+http://45.190.28.50/HISTORY_HD/index.m3u8
 
 # ============================================================
 # SAMSUNG TV PLUS BRASIL
