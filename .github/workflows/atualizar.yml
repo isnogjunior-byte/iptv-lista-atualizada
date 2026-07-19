@@ -1,0 +1,58 @@
+name: Atualizar Lista IPTV
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar playlists
+        run: |
+          curl -sL "https://raw.githubusercontent.com/OwnerPlugins/pluto-tv-m3u/main/pluto-live-BR.m3u" -o pluto.m3u
+          curl -sL "https://raw.githubusercontent.com/BuddyChewChew/app-m3u-generator/main/playlists/samsungtvplus_all.m3u" -o samsung.m3u
+          curl -sL "https://iptv-org.github.io/iptv/countries/br.m3u" -o aberta.m3u
+
+      - name: Combinar playlists
+        run: |
+          echo "#EXTM3U" > lista_iptv.m3u
+          echo "" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# LISTA IPTV UNIFICADA - Atualizada automaticamente" >> lista_iptv.m3u
+          echo "# Gerado em: $(date +'%d/%m/%Y %H:%M')" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# TV ABERTA BRASIL" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          cat aberta.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+          echo "" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# PLUTO TV BRASIL" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          cat pluto.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+          echo "" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          echo "# SAMSUNG TV PLUS" >> lista_iptv.m3u
+          echo "# ============================================================" >> lista_iptv.m3u
+          cat samsung.m3u | grep -v "#EXTM3U" >> lista_iptv.m3u
+
+      - name: Contar canais
+        run: |
+          CANAIS=$(grep -c "#EXTINF:" lista_iptv.m3u)
+          echo "Total de canais: $CANAIS"
+
+      - name: Commit e Push
+        run: |
+          git config user.name "IPTV Bot"
+          git config user.email "bot@iptv.local"
+          git add lista_iptv.m3u
+          git diff --staged --quiet || git commit -m "Atualizacao automatica $(date +'%d/%m/%Y %H:%M')"
+          git push
